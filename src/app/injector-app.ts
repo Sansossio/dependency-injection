@@ -19,8 +19,11 @@ export class InjectorApp {
   private setProperties (provider: Constructor) {
     const properties = getProperties(provider)
     for (const property of properties) {
-      const value = this.createProvider(property.value)
-      provider[property.key] = value
+      const { value, key } = property
+      if (!isClass(value)) {
+        throw new Error(`Property (${provider.constructor.name}:${key}) must be a class`)
+      }
+      provider[key] = this.createProvider(property.value)
     }
   }
 

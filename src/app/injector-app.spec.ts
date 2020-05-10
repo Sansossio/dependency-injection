@@ -42,22 +42,20 @@ describe('Injector app', () => {
     })
 
     it('should throw error when property is not a class value', () => {
-      expect(() => {
-        @Injectable()
-        class Test2 {
-          @Property()
-          property: null
-        }
-        InjectorApp.create([Test2])
-      }).toThrow()
+      @Injectable()
+      class Test2 {
+        @Property()
+        property: ''
+      }
+      expect(() => InjectorApp.create([Test2])).toThrow()
     })
   })
 
   describe('Get', () => {
-    it('should return instance of a specific profiver', () => {
-      class Test {}
-      const app = InjectorApp.create([Test])
-      expect(app.get(Test)).toBeInstanceOf(Test)
+    it('should return instance of a specific provider', () => {
+      class TestClass {}
+      const app = InjectorApp.create([TestClass])
+      expect(app.get(TestClass)).toBeInstanceOf(TestClass)
     })
 
     it('should return class injected inside another one', () => {
@@ -85,7 +83,7 @@ describe('Injector app', () => {
     })
   })
 
-  describe('Properties inject', () => {
+  describe('Inject properties', () => {
     it('should inject a provider inside a property', () => {
       class Test {}
       @Injectable()

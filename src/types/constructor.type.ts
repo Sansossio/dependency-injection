@@ -1,1 +1,3 @@
-export type Constructor = new (...args: any[]) => any
+class BaseClass {}
+
+export type Constructor = BaseClass & (new (...args: any[]) => any)

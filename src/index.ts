@@ -20,3 +20,4 @@ class Test2 {
 const app = InjectorApp.create([Test, Test2])
 const test2 = app.get(Test2)
 console.log(test2.test.a)
+console.log(test2.test2.a)
