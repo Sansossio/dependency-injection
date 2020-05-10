@@ -1,0 +1,32 @@
+{
+  "name": "dependency-injection",
+  "version": "0.0.1",
+  "description": "Simple depency injection implementation",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:prod": "node dist",
+    "start:dev": "tsnd --watch -- src",
+    "start:debug": "tsnd --inspect --watch -- src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sansossio/dependency-injection.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sansossio/dependency-injection/issues"
+  },
+  "homepage": "https://github.com/Sansossio/dependency-injection#readme",
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "ts-jest": "^25.5.1",
+    "ts-node": "^8.10.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslint": "^6.1.2",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.8.3"
+  }
+}
