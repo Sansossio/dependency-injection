@@ -6,7 +6,7 @@ export class InjectorApp {
   private getProvider (provider) {
     let prov = new provider()
     if (provider.injectable) {
-      const provArgs = provider.parameters.map((param, i) => {
+      const provArgs = provider.parameters.map((param) => {
         const { name } = param
         const value = this.providers.get(name)
         if (!value) {
