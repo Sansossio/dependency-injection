@@ -24,6 +24,20 @@ describe('Injector app', () => {
       }
       expect(() => InjectorApp.create([Test2])).toThrow()
     })
+
+    it('should return InjectorApp instance, proviers without order', () => {
+      class Test {
+        a = 1
+      }
+      @Injectable()
+      class Test2 {
+        constructor (
+          private readonly depency: Test
+        ) {}
+      }
+
+      expect(InjectorApp.create([Test2, Test])).toBeInstanceOf(InjectorApp)
+    })
   })
 
   describe('Get', () => {

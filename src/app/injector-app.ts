@@ -1,30 +1,36 @@
 import { isClass } from '../utils/is-class/is-class.utils'
+import { Constructor } from '../types/constructor.type'
+import { InjectableType } from '../types/injectable/injectable.type'
 
 export class InjectorApp {
   private readonly providers = new Map<string, any>()
 
-  private getProvider (provider) {
+  constructor (
+    private readonly dependencies: Constructor[]
+  ) {}
+
+  private existsDependency (dependency: Constructor) {
+    return !!this.dependencies.find(d => d.name === dependency.name)
+  }
+
+  private getProvider (provider: InjectableType) {
+    if (!this.existsDependency(provider)) {
+      throw new Error(`Dependency "${provider.name}" does not exists`)
+    }
     if (!provider.injectable) {
       return new provider()
     }
-    const provArgs = provider.parameters.map((param) => {
-      const { name } = param
-      const value = this.providers.get(name)
-      if (!value) {
-        throw new Error(`Dependency "${name}" does not exists`)
-      }
-      return value
-    })
+    const provArgs = provider.parameters.map(prov => this.getProvider(prov))
     return new provider(...provArgs)
   }
 
-  static create (providers: any[]) {
-    const app = new InjectorApp()
+  static create (providers: (Constructor | InjectableType)[]) {
+    const app = new InjectorApp(providers)
     for (const provider of providers) {
       if (!isClass(provider)) {
         throw new Error('Providers must be classes')
       }
-      app.providers.set(provider.name, app.getProvider(provider))
+      app.providers.set(provider.name, app.getProvider(provider as any))
     }
     return app
   }
