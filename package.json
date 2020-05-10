@@ -4,7 +4,7 @@
   "description": "Simple depency injection implementation",
   "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start:prod": "node dist",
     "start:dev": "tsnd --watch -- src",
     "start:debug": "tsnd --inspect --watch -- src",
