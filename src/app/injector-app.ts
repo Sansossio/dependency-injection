@@ -4,19 +4,18 @@ export class InjectorApp {
   private readonly providers = new Map<string, any>()
 
   private getProvider (provider) {
-    let prov = new provider()
-    if (provider.injectable) {
-      const provArgs = provider.parameters.map((param) => {
-        const { name } = param
-        const value = this.providers.get(name)
-        if (!value) {
-          throw new Error(`Dependency "${name}" does not exists`)
-        }
-        return value
-      })
-      prov = new provider(...provArgs)
+    if (!provider.injectable) {
+      return new provider()
     }
-    return prov
+    const provArgs = provider.parameters.map((param) => {
+      const { name } = param
+      const value = this.providers.get(name)
+      if (!value) {
+        throw new Error(`Dependency "${name}" does not exists`)
+      }
+      return value
+    })
+    return new provider(...provArgs)
   }
 
   static create (providers: any[]) {
