@@ -6,7 +6,7 @@ describe('Injector app', () => {
     it('should throw error when when some provider is not a class', () => {
       expect(
         () => {
-          InjectorApp.create([class {}, null])
+          InjectorApp.create([class {}, null as any])
         }
       ).toThrow()
     })
