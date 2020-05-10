@@ -45,7 +45,7 @@ describe('Injector app', () => {
       @Injectable()
       class Test2 {
         @Property()
-        property: ''
+        property: null
       }
       expect(() => InjectorApp.create([Test2])).toThrow()
     })
