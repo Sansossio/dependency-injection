@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "node dist",
     "start:dev": "tsnd --watch -- src",
-    "start:debug": "tsnd --inspect --watch -- src"
+    "start:debug": "tsnd --inspect --watch -- src",
+    "lint": "tslint --project tsconfig.json",
+    "lint:fix": "tslint --project tsconfig.json --fix"
   },
   "repository": {
     "type": "git",
