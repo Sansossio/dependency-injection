@@ -17,8 +17,12 @@
     "type": "git",
     "url": "git+https://github.com/Sansossio/dependency-injection.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "dependency",
+    "injector",
+    "dependency injection"
+  ],
+  "author": "Julio Sansossio",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Sansossio/dependency-injection/issues"
