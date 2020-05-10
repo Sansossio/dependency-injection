@@ -1,5 +1,6 @@
 import { InjectorApp } from './injector-app'
 import { Injectable } from '../decorators/injectable/injectable.decorator'
+import { Property } from '../decorators/property/property.decorator'
 
 describe('Injector app', () => {
   describe('Create', () => {
@@ -39,6 +40,17 @@ describe('Injector app', () => {
       expect(app).toBeInstanceOf(InjectorApp)
       expect(app.get(Test2).depency).toBeInstanceOf(Test)
     })
+
+    it('should throw error when property is not a class value', () => {
+      expect(() => {
+        @Injectable()
+        class Test2 {
+          @Property()
+          property: null
+        }
+        InjectorApp.create([Test2])
+      }).toThrow()
+    })
   })
 
   describe('Get', () => {
@@ -70,6 +82,21 @@ describe('Injector app', () => {
     it('should throw error when get.value is not a class', () => {
       const app = InjectorApp.create([])
       expect(() => app.get('' as any)).toThrow()
+    })
+  })
+
+  describe('Properties inject', () => {
+    it('should inject a provider inside a property', () => {
+      class Test {}
+      @Injectable()
+      class Test2 {
+        @Property()
+        property: Test
+      }
+      const app = InjectorApp.create([Test2, Test])
+      const getValue = app.get(Test2).property
+      expect(getValue).toBeDefined()
+      expect(getValue).toBeInstanceOf(Test)
     })
   })
 })

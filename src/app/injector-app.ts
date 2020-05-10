@@ -3,6 +3,7 @@ import { isClass } from '../utils/is-class/is-class.utils'
 import { Constructor } from '../types/constructor.type'
 import { InjectableEnum } from '../enum/injectable.enum'
 import { isInjectable } from '../utils/is-injectable/is-injectable.utils'
+import { getProperties } from '../utils/get-properties/get-properties.utils'
 
 export class InjectorApp {
   private readonly providers = new Map<string, any>()
@@ -15,7 +16,15 @@ export class InjectorApp {
     return !!this.dependencies.find(d => d.name === dependency.name)
   }
 
-  private getProvider (provider: Constructor) {
+  private setProperties (provider: Constructor) {
+    const properties = getProperties(provider)
+    for (const property of properties) {
+      const value = this.createProvider(property.value)
+      provider[property.key] = value
+    }
+  }
+
+  private createProvider (provider: Constructor) {
     if (!this.existsDependency(provider)) {
       throw new Error(`Dependency "${provider.name}" does not exists`)
     }
@@ -23,7 +32,7 @@ export class InjectorApp {
       return new provider()
     }
     const parameters = Reflect.getMetadata(InjectableEnum.PARAMETERS, provider)
-    const provArgs = parameters.map(prov => this.getProvider(prov))
+    const provArgs = parameters.map(prov => this.createProvider(prov))
     return new provider(...provArgs)
   }
 
@@ -33,7 +42,9 @@ export class InjectorApp {
       if (!isClass(provider)) {
         throw new Error('Providers must be classes')
       }
-      app.providers.set(provider.name, app.getProvider(provider as any))
+      const service = app.createProvider(provider)
+      app.setProperties(service)
+      app.providers.set(provider.name, service)
     }
     return app
   }

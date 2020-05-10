@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { getParameters } from '../../utils/get-parameters.utils/get-parameters.utils'
+import { getParameters } from '../../utils/get-parameters/get-parameters.utils'
 import { InjectableEnum } from '../../enum/injectable.enum'
 
 export function Injectable () {
