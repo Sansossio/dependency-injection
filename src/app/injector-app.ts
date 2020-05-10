@@ -1,6 +1,8 @@
+import 'reflect-metadata'
 import { isClass } from '../utils/is-class/is-class.utils'
 import { Constructor } from '../types/constructor.type'
-import { InjectableType } from '../types/injectable/injectable.type'
+import { InjectableEnum } from '../enum/injectable.enum'
+import { isInjectable } from '../utils/is-injectable/is-injectable.utils'
 
 export class InjectorApp {
   private readonly providers = new Map<string, any>()
@@ -13,18 +15,19 @@ export class InjectorApp {
     return !!this.dependencies.find(d => d.name === dependency.name)
   }
 
-  private getProvider (provider: InjectableType) {
+  private getProvider (provider: Constructor) {
     if (!this.existsDependency(provider)) {
       throw new Error(`Dependency "${provider.name}" does not exists`)
     }
-    if (!provider.injectable) {
+    if (!isInjectable(provider)) {
       return new provider()
     }
-    const provArgs = provider.parameters.map(prov => this.getProvider(prov))
+    const parameters = Reflect.getMetadata(InjectableEnum.PARAMETERS, provider)
+    const provArgs = parameters.map(prov => this.getProvider(prov))
     return new provider(...provArgs)
   }
 
-  static create (providers: (Constructor | InjectableType)[]) {
+  static create (providers: Constructor[]) {
     const app = new InjectorApp(providers)
     for (const provider of providers) {
       if (!isClass(provider)) {
