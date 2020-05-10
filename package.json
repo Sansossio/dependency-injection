@@ -2,7 +2,7 @@
   "name": "dependency-injection",
   "version": "0.0.1",
   "description": "Simple depency injection implementation",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "test:cov": "jest --coverage",
