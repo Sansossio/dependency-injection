@@ -32,11 +32,12 @@ describe('Injector app', () => {
       @Injectable()
       class Test2 {
         constructor (
-          private readonly depency: Test
+          readonly depency: Test
         ) {}
       }
-
-      expect(InjectorApp.create([Test2, Test])).toBeInstanceOf(InjectorApp)
+      const app = InjectorApp.create([Test2, Test])
+      expect(app).toBeInstanceOf(InjectorApp)
+      expect(app.get(Test2).depency).toBeInstanceOf(Test)
     })
   })
 
