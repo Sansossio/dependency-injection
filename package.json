@@ -9,7 +9,8 @@
     "start:dev": "tsnd --watch -- src",
     "start:debug": "tsnd --inspect --watch -- src",
     "lint": "tslint --project tsconfig.json",
-    "lint:fix": "tslint --project tsconfig.json --fix"
+    "lint:fix": "tslint --project tsconfig.json --fix",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
