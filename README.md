@@ -6,7 +6,7 @@ This TypeScript library allows you to easily declare and resolve dependencies, i
 
 # Example
 ```ts
-import { Injectable, InjectorApp } from 'typescript-dependency-injection'
+import { Injectable, InjectorApp } from 'dependency-injection-ts'
 
 class B {
   value = 1
