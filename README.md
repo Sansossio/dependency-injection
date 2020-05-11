@@ -7,6 +7,7 @@ This TypeScript library allows you to easily declare and resolve dependencies, i
 *Author:* Julio Sansossio - [https://github.com/Sansossio](https://github.com/Sansossio)
 
 # Example
+### Constructor
 ```ts
 import { Injectable, InjectorApp } from 'dependency-injection-implementation'
 
@@ -19,6 +20,27 @@ class C {
   constructor (
     readonly b: B
   ) {}
+}
+
+const app = InjectorApp.create([C, B])
+const c = app.get(C)
+
+console.log(c.b.value)
+// Log: 1
+
+```
+### Property
+```ts
+import { Injectable, Property, InjectorApp } from 'dependency-injection-implementation'
+
+class B {
+  value = 1
+}
+
+@Injectable()
+class C {
+  @Property()
+  b: B
 }
 
 const app = InjectorApp.create([C, B])
