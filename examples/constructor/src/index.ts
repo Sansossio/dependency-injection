@@ -1,4 +1,4 @@
-import { Injectable, InjectorApp, Property } from '../src'
+import { Injectable, InjectorApp } from 'dependency-injection-implementation'
 
 class B {
   value = 1
@@ -6,8 +6,9 @@ class B {
 
 @Injectable()
 class C {
-  @Property()
-  b: B
+  constructor (
+    readonly b: B
+  ) {}
 }
 
 const app = InjectorApp.create([C, B])

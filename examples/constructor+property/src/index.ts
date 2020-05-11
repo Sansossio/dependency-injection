@@ -1,4 +1,4 @@
-import { Injectable, Property, InjectorApp } from '../src'
+import { Injectable, Property, InjectorApp } from 'dependency-injection-implementation'
 
 class A {
   value = 1
