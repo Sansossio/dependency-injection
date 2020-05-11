@@ -6,6 +6,11 @@ This TypeScript library allows you to easily declare and resolve dependencies, i
 
 *Author:* Julio Sansossio - [https://github.com/Sansossio](https://github.com/Sansossio)
 
+# Install
+```sh
+npm install dependency-injection-implementation
+```
+
 # Example
 ### Constructor
 ```ts
