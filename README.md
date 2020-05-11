@@ -25,3 +25,4 @@ const c = app.get(C)
 console.log(c.b.value)
 // Log: 1
 ```
+[More examples](https://github.com/Sansossio/dependency-injection/tree/master/examples)
