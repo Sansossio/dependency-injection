@@ -1,12 +1,14 @@
 # Dependency injection
 
+![https://www.npmjs.com/package/dependency-injection-ts](https://nodei.co/npm/dependency-injection-ts.png)
+
 This TypeScript library allows you to easily declare and resolve dependencies, injecting them in your classes attributes, using eye-candy TypeScript annotations.
 
 *Author:* Julio Sansossio - [https://github.com/Sansossio](https://github.com/Sansossio)
 
 # Example
 ```ts
-import { Injectable, InjectorApp } from 'typescript-dependency-injection'
+import { Injectable, InjectorApp } from 'dependency-injection-ts'
 
 class B {
   value = 1
@@ -25,3 +27,4 @@ const c = app.get(C)
 console.log(c.b.value)
 // Log: 1
 ```
+[More examples](https://github.com/Sansossio/dependency-injection/tree/master/examples)
