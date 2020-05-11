@@ -1,6 +1,6 @@
 {
   "name": "dependency-injection-implementation",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Simple depency injection implementation",
   "main": "dist/index.js",
   "scripts": {
