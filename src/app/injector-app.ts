@@ -36,7 +36,9 @@ export class InjectorApp {
     }
     const parameters = Reflect.getMetadata(InjectableEnum.PARAMETERS, provider)
     const provArgs = parameters.map(prov => this.createProvider(prov))
-    return new provider(...provArgs)
+    const app = new provider(...provArgs)
+    this.setProperties(app)
+    return app
   }
 
   static create (providers: Constructor[]) {
@@ -46,7 +48,6 @@ export class InjectorApp {
         throw new Error('Providers must be classes')
       }
       const service = app.createProvider(provider)
-      app.setProperties(service)
       app.providers.set(provider.name, service)
     }
     return app
