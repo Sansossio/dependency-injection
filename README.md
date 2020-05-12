@@ -12,7 +12,7 @@ npm install dependency-injection-implementation
 ```
 
 # Example
-### Constructor
+### Inject constructor
 ```ts
 import { Injectable, InjectorApp } from 'dependency-injection-implementation'
 
@@ -34,8 +34,7 @@ console.log(c.b.value)
 // Log: 1
 
 ```
-### Property
-#### Typed property
+### Inject property
 ```ts
 import { Injectable, Property, InjectorApp } from 'dependency-injection-implementation'
 
@@ -47,32 +46,16 @@ class B {
 class C {
   @Property()
   b: B
-}
 
-const app = InjectorApp.create([C, B])
-const c = app.get(C)
-
-console.log(c.b.value)
-// Log: 1
-```
-#### Untyped property
-```ts
-import { Injectable, Property, InjectorApp } from 'dependency-injection-implementation'
-
-class B {
-  value = 1
-}
-
-@Injectable()
-class C {
   @Property({ type: B })
-  b
+  untyped
 }
 
 const app = InjectorApp.create([C, B])
 const c = app.get(C)
 
 console.log(c.b.value)
+console.log(c.untyped.value)
 // Log: 1
 ```
 [More examples](https://github.com/Sansossio/dependency-injection/tree/master/examples)
