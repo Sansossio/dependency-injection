@@ -8,9 +8,13 @@ class B {
 class C {
   @Property()
   b: B
+
+  @Property({ type: B })
+  untyped
 }
 
 const app = InjectorApp.create([C, B])
 const c = app.get(C)
 
 console.log(c.b.value)
+console.log(c.untyped.value)

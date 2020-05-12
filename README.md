@@ -35,6 +35,7 @@ console.log(c.b.value)
 
 ```
 ### Property
+#### Typed property
 ```ts
 import { Injectable, Property, InjectorApp } from 'dependency-injection-implementation'
 
@@ -46,6 +47,26 @@ class B {
 class C {
   @Property()
   b: B
+}
+
+const app = InjectorApp.create([C, B])
+const c = app.get(C)
+
+console.log(c.b.value)
+// Log: 1
+```
+#### Untyped property
+```ts
+import { Injectable, Property, InjectorApp } from 'dependency-injection-implementation'
+
+class B {
+  value = 1
+}
+
+@Injectable()
+class C {
+  @Property({ type: B })
+  b
 }
 
 const app = InjectorApp.create([C, B])
