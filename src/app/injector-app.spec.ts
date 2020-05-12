@@ -96,5 +96,18 @@ describe('Injector app', () => {
       expect(getValue).toBeDefined()
       expect(getValue).toBeInstanceOf(Test)
     })
+
+    it('should inject a provider inside a property untyped', () => {
+      class Test {}
+      @Injectable()
+      class Test2 {
+        @Property({ type: Test })
+        property
+      }
+      const app = InjectorApp.create([Test2, Test])
+      const getValue = app.get(Test2).property
+      expect(getValue).toBeDefined()
+      expect(getValue).toBeInstanceOf(Test)
+    })
   })
 })
