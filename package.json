@@ -7,6 +7,7 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "start": "node dist",
+    "start:test": "tsnd test.ts",
     "start:dev": "tsnd --watch -- src",
     "start:debug": "tsnd --inspect --watch -- src",
     "lint": "tslint --project tsconfig.json",
