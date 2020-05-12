@@ -1,10 +1,11 @@
 import 'reflect-metadata'
 import { Property } from './property.type'
 import { InjectableEnum } from '../../enum/injectable.enum'
+import { getProperties } from '../../utils/get-properties/get-properties.utils'
 
 export function Property () {
   return function (target: any, key: string) {
-    const fields: Property[] = Reflect.getMetadata(InjectableEnum.PROPERTIES, target) || []
+    const fields: Property[] = getProperties(target)
     const value = Reflect.getMetadata('design:type', target, key)
     const property: Property = {
       key,
